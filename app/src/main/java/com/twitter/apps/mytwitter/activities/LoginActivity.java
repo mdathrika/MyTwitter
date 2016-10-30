@@ -1,18 +1,28 @@
-package com.codepath.apps.restclienttemplate;
+package com.twitter.apps.mytwitter.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.oauth.OAuthLoginActionBarActivity;
-import com.codepath.oauth.OAuthLoginActivity;
+import com.twitter.apps.mytwitter.R;
+import com.twitter.apps.mytwitter.serviceclient.TwitterClient;
 
-public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
+public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+
+		ImageView ivImg = (ImageView)findViewById(R.id.ivBg);
+		Glide.with(this)
+				.load("https://media.giphy.com/media/k4ZItrTKDPnSU/giphy.gif")
+				.centerCrop()
+				.into(ivImg);
 	}
 
 
@@ -27,8 +37,8 @@ public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
 	// i.e Display application "homepage"
 	@Override
 	public void onLoginSuccess() {
-		// Intent i = new Intent(this, PhotosActivity.class);
-		// startActivity(i);
+		Intent i = new Intent(this, TimelineActivity.class);
+		startActivity(i);
 	}
 
 	// OAuth authentication flow failed, handle the error
@@ -44,5 +54,6 @@ public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
 	public void loginToRest(View view) {
 		getClient().connect();
 	}
+
 
 }
