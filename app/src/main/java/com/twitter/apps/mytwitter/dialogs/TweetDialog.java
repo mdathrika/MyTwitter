@@ -111,8 +111,15 @@ public class TweetDialog extends DialogFragment {
 
         // Fetch arguments from bundle and set title
         User mydetails = getArguments().getParcelable("user");
-        screenName.setText(mydetails.getScreenName());
-        name.setText(mydetails.getName());
+        if(mydetails != null) {
+            screenName.setText(mydetails.getScreenName());
+            name.setText(mydetails.getName());
+        }
+
+        String tweetMsg = getArguments().getString("tweet");
+        if(tweetMsg != null) {
+            tweetText.setText(tweetMsg);
+        }
         //getDialog().setTitle(title);
         // Show soft keyboard automatically and request focus to field
         getDialog().getWindow().setSoftInputMode(

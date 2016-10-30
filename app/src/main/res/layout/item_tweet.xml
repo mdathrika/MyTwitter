@@ -118,6 +118,13 @@
                 android:drawableLeft="@drawable/favorite_unclicked"
                 android:layout_weight="2"
                 />
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/share"
+                android:layout_height="wrap_content"
+                android:src="@drawable/share_action"
+                android:layout_weight="1"/>
     </LinearLayout>
 </RelativeLayout>
     </android.support.v7.widget.CardView>

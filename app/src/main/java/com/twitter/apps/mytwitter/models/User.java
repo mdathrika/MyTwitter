@@ -3,17 +3,29 @@ package com.twitter.apps.mytwitter.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.twitter.apps.mytwitter.MyDatabase;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Created by mdathrika on 10/27/16.
  */
-public class User implements Parcelable{
+@Table(database = MyDatabase.class)
+public class User extends BaseModel implements Parcelable{
 
+    @Column
     private String name;
+    @PrimaryKey
+    @Column
     private long uid;
+    @Column
     private String screenName;
+    @Column
     private String profileImageUrl;
 
     public String getName() {

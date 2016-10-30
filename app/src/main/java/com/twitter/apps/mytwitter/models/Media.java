@@ -3,17 +3,31 @@ package com.twitter.apps.mytwitter.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.twitter.apps.mytwitter.MyDatabase;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Created by mdathrika on 10/29/16.
  */
-public class Media implements Parcelable {
 
+@Table(database = MyDatabase.class)
+public class Media extends BaseModel implements Parcelable {
+
+    @Column
     private String mediaUrl;
+    @Column
     private String url;
+    @Column
     private String type;
+
+    @PrimaryKey
+    @Column
     private long id;
 
     public String getMediaUrl() {

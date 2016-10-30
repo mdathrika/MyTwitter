@@ -1,6 +1,7 @@
 package com.twitter.apps.mytwitter.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -38,6 +39,29 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	@Override
 	public void onLoginSuccess() {
 		Intent i = new Intent(this, TimelineActivity.class);
+
+		i.putExtra("fromShare",false);
+
+		//Share Intent
+		Intent intent = getIntent();
+		String action = intent.getAction();
+		String type = intent.getType();
+
+
+		if (Intent.ACTION_SEND.equals(action) && type != null) {
+			if ("text/plain".equals(type)) {
+
+				// Make sure to check whether returned data will be null.
+				String titleOfPage = intent.getStringExtra(Intent.EXTRA_SUBJECT);
+				String urlOfPage = intent.getStringExtra(Intent.EXTRA_TEXT);
+				//Uri imageUriOfPage = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+				i.putExtra("fromShare",true);
+				i.putExtra("title",titleOfPage);
+				i.putExtra("urlOfPage",urlOfPage);
+			}
+		}
+
+
 		startActivity(i);
 	}
 

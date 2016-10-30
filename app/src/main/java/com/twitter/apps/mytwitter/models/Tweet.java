@@ -4,6 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateUtils;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ForeignKey;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.twitter.apps.mytwitter.MyDatabase;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,19 +24,42 @@ import java.util.Locale;
 /**
  * Created by mdathrika on 10/27/16.
  */
-public class Tweet implements Parcelable {
-    private String body;
+@Table(database = MyDatabase.class)
+public class Tweet extends BaseModel implements Parcelable {
+
+
+    @PrimaryKey
+    @Column
     private long uid;
 
+    @Column
+    private String body;
+    @Column
     private String createdAt;
+
+    @Column
     private String timeAgo;
+
+    @Column
     private int retweetCount;
+
+    @Column
     private boolean retweeted;
+
+    @Column
     private int favouritesCount;
+
+    @Column
     private boolean favorited;
+
+    @Column
     private String url;
 
+    @Column
+    @ForeignKey(saveForeignKeyModel = true)
     private User user;
+    @Column
+    @ForeignKey(saveForeignKeyModel = true)
     private Media media;
 
     public Media getMedia() {

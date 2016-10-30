@@ -143,6 +143,14 @@ public class TimelineActivity extends AppCompatActivity {
 
         fetchUserDetails();
 
+        Intent intent = getIntent();
+        if(intent.getBooleanExtra("fromShare", false)) {
+            String title = intent.getStringExtra("title");
+            String urlOfPage = intent.getStringExtra("urlOfPage");
+
+            showTweetDialog(title + " " + urlOfPage);
+        }
+
     }
 
     private void attachSwipeRefresh() {
@@ -210,38 +218,24 @@ public class TimelineActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_tweet) {
-            showTweetDialog();
+            showTweetDialog(null);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void showTweetDialog() {
+    private void showTweetDialog(String tweetFromExternal) {
         FragmentManager fm = getSupportFragmentManager();
         TweetDialog tweetDialog = new TweetDialog();
         Bundle bundle = new Bundle();
         bundle.putParcelable("user", myDetails);
+        if(tweetFromExternal != null) {
+            bundle.putString("tweet", tweetFromExternal);
+        }
+
         tweetDialog.setArguments(bundle);
         tweetDialog.show(fm, "dialog_tweet");
-
-        /*new MaterialDialog.Builder(this)
-        //.title("New Tweet")
-        .onPositive(new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
-            }
-        })
-        .onNegative(new MaterialDialog.SingleButtonCallback() {
-    @Override
-    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-        dialog.dismiss();
-    }
-})
-        .customView(R.layout.dialog_tweet, true)
-
-        .show();*/
     }
 
     private void fetchUserDetails() {
