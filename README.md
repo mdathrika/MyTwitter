@@ -2,7 +2,7 @@
 
 **My Twitter** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **24** hours spent in total
+Time spent: **30** hours spent in total
 
 ## User Stories
 
@@ -25,8 +25,8 @@ The following **optional** features are implemented:
 * [x] User can **click a link within a tweet body** on tweet details view. The click will launch the web browser with relevant page opened.
 * [x] User can **pull down to refresh tweets timeline**
 * [ ] User can **open the twitter app offline and see last loaded tweets**. Persisted in SQLite tweets are refreshed on every application launch. While "live data" is displayed when app can get it from Twitter API, it is also saved for use in offline mode.
-* [ ] User can tap a tweet to **open a detailed tweet view**
-* [ ] User can **select "reply" from detail view to respond to a tweet**
+* [x] User can tap a tweet to **open a detailed tweet view**
+* [x] User can **select "reply" from detail view to respond to a tweet**
 * [x] Improve the user interface and theme the app to feel "twitter branded"
 
 The following **bonus** features are implemented:
@@ -47,14 +47,14 @@ The following **bonus** features are implemented:
 The following **additional** features are implemented:
 
 * [x] Shows number of tweets/favorites/replied along with count
-* [x] Favorite clicks
+* [x] Favorite/Retweet clicks count
 * [x] Share tweet from timeline
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='./Twitter.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -65,11 +65,12 @@ Describe any challenges encountered while building the app.
 ## Open-source libraries used
 
 - [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
-- [Picasso](http://square.github.io/picasso/) - Image loading and caching library for Android
+- [Glide](http://square.github.io/picasso/) - Image loading and caching library for Android
+- [Cardview] - Cardview
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [Mahesh Dathrika]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

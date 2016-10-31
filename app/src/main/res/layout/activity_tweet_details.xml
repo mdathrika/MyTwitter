@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="5dp"
+    tools:context="com.twitter.apps.mytwitter.TweetDetailsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white"
+        android:fitsSystemWindows="true"
+        android:background="@color/colorBG"
+        android:elevation="4dp"
+        android:id="@+id/tweet_details_toolbar"
+        app:layout_scrollFlags="scroll|enterAlways"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    </android.support.v7.widget.Toolbar>
+
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tweet_details_toolbar"
+        android:id="@+id/ivProfileImage"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tweet_details_toolbar"
+        android:layout_toRightOf="@+id/ivProfileImage"
+        android:layout_alignTop="@+id/ivProfileImage"
+        android:orientation="vertical"
+        android:id="@+id/llayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginRight="20dp"
+            android:textColor="@android:color/black"
+            android:id="@+id/tvUserName"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginRight="20dp"
+            android:textColor="@android:color/black"
+            android:id="@+id/tvScreenName"/>
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:layout_gravity="right"
+        android:textColor="@android:color/black"
+        android:layout_toRightOf="@+id/llayout"
+        android:layout_below="@+id/tweet_details_toolbar"
+        android:layout_alignTop="@+id/ivProfileImage"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/tvTimeAgo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivProfileImage"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:layout_centerInParent="true"
+        android:layout_alignLeft="@+id/ivProfileImage"
+        android:paddingLeft="20dp"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:id="@+id/tvBody"/>
+
+    <ImageView
+        android:layout_width="600dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginTop="15dp"
+        android:layout_alignLeft="@+id/tvBody"
+        android:id="@+id/ivInlineImage"/>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivInlineImage"
+        android:layout_alignLeft="@+id/tvBody"
+        android:paddingLeft="20dp"
+        android:orientation="horizontal"
+        android:id="@+id/llActions">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:id="@+id/retweetCnt"
+            android:drawableLeft="@drawable/retweet_unclicked"
+            android:layout_weight="0.3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray"
+            android:id="@+id/favouriteCnt"
+            android:drawableLeft="@drawable/favorite_unclicked"
+            android:layout_weight="0.3"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/share"
+            android:layout_height="wrap_content"
+            android:src="@drawable/share_action"
+            android:layout_weight="0.3"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+
+        >
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.90"
+                android:textColor="@android:color/black"
+                android:hint="@string/reply_to"
+                android:textColorHint="@color/gray"
+                android:id="@+id/txtTweet"/>
+
+            <Button
+                android:id="@+id/btnTweet"
+                android:layout_width="wrap_content"
+                android:text="@string/tweet"
+                android:layout_toRightOf="@+id/txtTweet"
+                android:textColor="@android:color/white"
+                android:background="@color/colorBG"
+                android:layout_weight="0.10"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</RelativeLayout>

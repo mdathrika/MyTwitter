@@ -31,6 +31,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.twitter.apps.mytwitter.MyTwitterApplication;
 import com.twitter.apps.mytwitter.R;
+import com.twitter.apps.mytwitter.TweetDetailsActivity;
 import com.twitter.apps.mytwitter.adapter.ItemClickSupport;
 import com.twitter.apps.mytwitter.decoration.DividerItemDecoration;
 import com.twitter.apps.mytwitter.decoration.SpacesItemDecoration;
@@ -113,7 +114,11 @@ public class TimelineActivity extends AppCompatActivity {
                 new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        if(tweets.get(position).getUrl() == null || tweets.get(position).getUrl().length() == 0) {
+                        Intent intent = new Intent(context, TweetDetailsActivity.class);
+                        Tweet tweet = tweets.get(position);
+                        intent.putExtra("tweet", tweet);
+                        startActivity(intent);
+                        /*if(tweets.get(position).getUrl() == null || tweets.get(position).getUrl().length() == 0) {
                             return;
                         }
 
@@ -134,7 +139,7 @@ public class TimelineActivity extends AppCompatActivity {
                         //builder.setActionButton(bitmap, "Share Link", pendingIntent, true);
 
                         CustomTabsIntent customTabsIntent = builder.build();
-                        customTabsIntent.launchUrl(activity, Uri.parse(tweets.get(position).getUrl()));
+                        customTabsIntent.launchUrl(activity, Uri.parse(tweets.get(position).getUrl()));*/
                     }
                 }
         );

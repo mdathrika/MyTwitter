@@ -8,4 +8,5 @@
     <string name="whats_happening">Whats happening?</string>
     <string name="tweet_count">140</string>
     <string name="compose">Compose</string>
+    <string name="reply_to">Reply to </string>
 </resources>
