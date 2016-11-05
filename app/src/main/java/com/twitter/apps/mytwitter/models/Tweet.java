@@ -151,7 +151,6 @@ public class Tweet extends BaseModel implements Parcelable {
     }
 
     public static Tweet fromJSON(JSONObject jsonObject) {
-        System.out.println("******************jsonObject****************"+jsonObject);
         Tweet tweet = new Tweet();
         try {
             tweet.body = jsonObject.getString("text");

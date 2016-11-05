@@ -7,28 +7,16 @@
     android:layout_height="match_parent"
     xmlns:http="http://schemas.android.com/tools">
 
-    <!-- AppBarLayout is a wrapper for a Toolbar in order to apply scrolling effects. -->
-    <!-- Note that AppBarLayout expects to be the first child nested within a CoordinatorLayout -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-
-<!--LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    android:background="?android:attr/selectableItemBackground"
-    tools:context=".activities.TimelineActivity">
-
-    <include layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/timeline_toolbar" /-->
 
         <android.support.v7.widget.Toolbar
             android:minHeight="?attr/actionBarSize"
@@ -46,28 +34,60 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipeContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/tabs"
+            app:pstsShouldExpand="true"
+            app:pstsTextAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/appBar"
+            android:background="@android:color/white"
+            app:pstsUnderlineColor="@color/colorBG"
+            app:pstsIndicatorColor="@color/colorBG"
+            android:textSize="14sp"
+            android:textColor="@color/colorBG"/>
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvtweets"
-            android:layout_below="@+id/timeline_toolbar"
+        <android.support.v4.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipeContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingTop="55dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:background="@android:color/white"/>
+            android:layout_below="@+id/tabs">
 
 
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white">
+
+                <!--<android.support.design.widget.TabLayout-->
+                    <!--android:id="@+id/sliding_tabs"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/colorBG"-->
+                    <!--app:tabMode="scrollable"/>-->
+
+            </android.support.v4.view.ViewPager>
 
 
+            <!--<fragment-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:name="com.twitter.apps.mytwitter.fragments.MentionsTimelineFragment"-->
+                <!--android:id="@+id/fragment_tweets"-->
+                <!--layout="@layout/fragment_tweets_list" />-->
+
+
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
-<!--/LinearLayout-->
+
+
+
+

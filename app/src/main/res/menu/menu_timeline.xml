@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/action_profile" android:title="@string/profile"
+        android:icon="@drawable/ic_profile"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:onClick="onProfileView"/>
+
     <item android:id="@+id/action_tweet" android:title="@string/compose"
         android:icon="@drawable/tweet"
         android:orderInCategory="101" app:showAsAction="ifRoom|collapseActionView" />

@@ -28,6 +28,56 @@ public class User extends BaseModel implements Parcelable{
     @Column
     private String profileImageUrl;
 
+    private String profileBgImageUrl;
+
+    private String description;
+
+    private int followersCount;
+
+    private int friendsCount;
+
+    private int tweetsCount;
+
+    public String getProfileBgImageUrl() {
+        return profileBgImageUrl;
+    }
+
+    public void setProfileBgImageUrl(String profileBgImageUrl) {
+        this.profileBgImageUrl = profileBgImageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getFollowersCount() {
+        return followersCount;
+    }
+
+    public void setFollowersCount(int followersCount) {
+        this.followersCount = followersCount;
+    }
+
+    public int getFriendsCount() {
+        return friendsCount;
+    }
+
+    public void setFriendsCount(int friendsCount) {
+        this.friendsCount = friendsCount;
+    }
+
+    public int getTweetsCount() {
+        return tweetsCount;
+    }
+
+    public void setTweetsCount(int tweetsCount) {
+        this.tweetsCount = tweetsCount;
+    }
+
     public String getName() {
         return name;
     }
@@ -68,12 +118,21 @@ public class User extends BaseModel implements Parcelable{
             user.uid = jsonObject.getLong("id");
             user.profileImageUrl = jsonObject.getString("profile_image_url");
 
+            user.description = jsonObject.getString("description");
+            user.profileBgImageUrl = jsonObject.getString("profile_background_image_url");
+            user.followersCount = jsonObject.getInt("followers_count");
+            user.friendsCount = jsonObject.getInt("friends_count");
+            user.tweetsCount = jsonObject.getInt("statuses_count");
+
         }catch(JSONException e) {
             e.printStackTrace();
         }
         return user;
     }
 
+
+    public User() {
+    }
 
     @Override
     public int describeContents() {
@@ -86,9 +145,11 @@ public class User extends BaseModel implements Parcelable{
         dest.writeLong(this.uid);
         dest.writeString(this.screenName);
         dest.writeString(this.profileImageUrl);
-    }
-
-    public User() {
+        dest.writeString(this.profileBgImageUrl);
+        dest.writeString(this.description);
+        dest.writeInt(this.followersCount);
+        dest.writeInt(this.friendsCount);
+        dest.writeInt(this.tweetsCount);
     }
 
     protected User(Parcel in) {
@@ -96,6 +157,11 @@ public class User extends BaseModel implements Parcelable{
         this.uid = in.readLong();
         this.screenName = in.readString();
         this.profileImageUrl = in.readString();
+        this.profileBgImageUrl = in.readString();
+        this.description = in.readString();
+        this.followersCount = in.readInt();
+        this.friendsCount = in.readInt();
+        this.tweetsCount = in.readInt();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

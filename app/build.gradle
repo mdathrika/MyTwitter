@@ -58,4 +58,6 @@ dependencies {
     compile 'com.android.support:design:24.1.0'
     compile "com.android.support:percent:24.1.0"
     compile 'jp.wasabeef:glide-transformations:2.0.1'
+
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 }

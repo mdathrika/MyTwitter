@@ -69,12 +69,12 @@ public class TwitterClient extends OAuthBaseClient {
 	}
 
 	public void getUserDetails(AsyncHttpResponseHandler handler) {
-		String apiUrl = getApiUrl("account/settings.json");
+		String apiUrl = getApiUrl("account/verify_credentials.json");
 		RequestParams params = new RequestParams();
 		//params.put("screen_name", "dathrika_mahesh");
 		//params.put("include_email", "false");
 		params.put("format", "json");
-		client.post(apiUrl, params, handler);
+		client.get(apiUrl, params, handler);
 	}
 
 	public void postRetweet(String tweetId, AsyncHttpResponseHandler handler) {
@@ -91,4 +91,33 @@ public class TwitterClient extends OAuthBaseClient {
 		params.put("format", "json");
 		client.post(apiUrl, params, handler);
 	}
+
+	public void getMentionsTimeline(String max_id, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+
+		RequestParams params = new RequestParams();
+		params.put("count", 25);
+		if(max_id != null) {
+			params.put("max_id", max_id);
+		}
+
+		params.put("format", "json");
+		client.get(apiUrl, params, handler);
+	}
+
+	public void getUserTimeline(String screeName, String max_id, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/user_timeline.json");
+
+		RequestParams params = new RequestParams();
+		params.put("count", 25);
+		if(max_id != null) {
+			params.put("max_id", max_id);
+		}
+		if(screeName != null) {
+			params.put("screen_name", screeName);
+		}
+		params.put("format", "json");
+		client.get(apiUrl, params, handler);
+	}
+
 }
