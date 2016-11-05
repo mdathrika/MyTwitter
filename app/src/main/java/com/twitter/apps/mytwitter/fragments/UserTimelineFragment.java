@@ -15,6 +15,8 @@ import com.twitter.apps.mytwitter.serviceclient.TwitterClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -47,6 +49,7 @@ public class UserTimelineFragment extends TweetsListFragment {
 
     private void getUserTimeline() {
         String screenName = getArguments().getString("screen_name");
+        final Profile profile = (Profile)getActivity();
         client.getUserTimeline(screenName, null, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -62,12 +65,15 @@ public class UserTimelineFragment extends TweetsListFragment {
 
     protected void fetchUserDetails() {
         final Profile profile = (Profile)getActivity();
-        client.getUserDetails(new JsonHttpResponseHandler(){
+        String screenName = getArguments().getString("screen_name");
+        client.findUser(screenName, new JsonHttpResponseHandler(){
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                myDetails = User.fromJSON(response);
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                List<User> user = User.fromJSONArray(response);
+                if(user != null && user.size() > 0) {
+                    profile.populateHeader(user.get(0));
+                }
 
-                profile.populateHeader(myDetails);
             }
 
             @Override

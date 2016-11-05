@@ -21,6 +21,10 @@ import com.twitter.apps.mytwitter.serviceclient.TwitterClient;
 
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
+
 import cz.msebera.android.httpclient.Header;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -51,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity implements Profile {
     }
 
     public void populateHeader(User user) {
+
         getSupportActionBar().setTitle(user.getScreenName());
         ImageView profilePic = (ImageView)findViewById(R.id.profilePic);
 
@@ -63,8 +68,9 @@ public class ProfileActivity extends AppCompatActivity implements Profile {
         name.setText(user.getName());
         screen_name.setText(user.getScreenName());
         description.setText(user.getDescription());
-        followers.setText(user.getFollowersCount() + " FOLLOWERS");
-        following.setText(user.getFriendsCount() + " FOLLOWING");
+
+        followers.setText(NumberFormat.getIntegerInstance(Locale.ENGLISH).format(user.getFollowersCount()) + " FOLLOWERS");
+        following.setText(NumberFormat.getIntegerInstance(Locale.ENGLISH).format(user.getFriendsCount()) + " FOLLOWING");
 
         Glide.with(this).load(user.getProfileImageUrl()).bitmapTransform(new RoundedCornersTransformation(this, 10, 0,
                 RoundedCornersTransformation.CornerType.ALL)).into(profilePic);

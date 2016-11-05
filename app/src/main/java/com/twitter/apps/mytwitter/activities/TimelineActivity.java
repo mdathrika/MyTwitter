@@ -69,17 +69,19 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 /**
  * Created by mdathrika on 10/27/16.
  */
-public class TimelineActivity extends AppCompatActivity implements Timeline {
+public class TimelineActivity extends BaseActivity implements Timeline {
 
-    private TwitterClient client;
     private SwipeRefreshLayout swipeContainer;
     final Activity activity = this;
     final Context context = this;
     MentionsTimelineFragment fragment;
 
-    private User myDetails;
     ViewPager viewPager;
     TweetsPagerAdapter pagerAdapter;
+
+    public TimelineActivity() {
+        client = MyTwitterApplication.getRestClient();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +114,8 @@ public class TimelineActivity extends AppCompatActivity implements Timeline {
 
             showTweetDialog(title + " " + urlOfPage);
         }
+
+        getMyDetails();
 
     }
 
@@ -169,6 +173,7 @@ public class TimelineActivity extends AppCompatActivity implements Timeline {
 
     public void onProfileView(MenuItem view) {
         Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("screen_name", myDetails.getScreenName());
         startActivity(intent);
     }
 

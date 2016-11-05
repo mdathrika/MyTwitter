@@ -9,8 +9,12 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.twitter.apps.mytwitter.MyDatabase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mdathrika on 10/27/16.
@@ -113,7 +117,7 @@ public class User extends BaseModel implements Parcelable{
     public static User fromJSON(JSONObject jsonObject) {
         User user = new User();
         try {
-            user.screenName = "@"+jsonObject.getString("screen_name");
+            user.screenName = jsonObject.getString("screen_name");
             user.name = jsonObject.getString("name");
             user.uid = jsonObject.getLong("id");
             user.profileImageUrl = jsonObject.getString("profile_image_url");
@@ -128,6 +132,18 @@ public class User extends BaseModel implements Parcelable{
             e.printStackTrace();
         }
         return user;
+    }
+
+    public static List<User> fromJSONArray(JSONArray jsonArray) {
+        List<User> users = new ArrayList<>();
+        for(int i=0; i<jsonArray.length(); i++) {
+            try {
+                users.add(User.fromJSON((JSONObject) jsonArray.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return users;
     }
 
 

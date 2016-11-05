@@ -120,4 +120,61 @@ public class TwitterClient extends OAuthBaseClient {
 		client.get(apiUrl, params, handler);
 	}
 
+	public void findUser(String screeName, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("users/lookup.json");
+
+		RequestParams params = new RequestParams();
+		params.put("count", 25);
+		if(screeName != null) {
+			params.put("screen_name", screeName);
+		}
+		params.put("format", "json");
+		client.get(apiUrl, params, handler);
+	}
+
+	public void getFavoritesList(String screeName, String max_id, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("favorites/list.json");
+
+		RequestParams params = new RequestParams();
+		params.put("count", 25);
+		if(screeName != null) {
+			params.put("screen_name", screeName);
+		}
+		if(max_id != null) {
+			params.put("max_id", max_id);
+		}
+		params.put("format", "json");
+		client.get(apiUrl, params, handler);
+	}
+
+	public void getFollowersList(String screeName, String cursor, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("followers/list.json");
+
+		RequestParams params = new RequestParams();
+		params.put("count", 25);
+		if(screeName != null) {
+			params.put("screen_name", screeName);
+		}
+		if(cursor != null) {
+			params.put("cursor", cursor);
+		}
+		params.put("format", "json");
+		client.get(apiUrl, params, handler);
+	}
+
+	public void getFriendsList(String screeName, String cursor, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("friends/list.json");
+
+		RequestParams params = new RequestParams();
+		params.put("count", 25);
+		if(screeName != null) {
+			params.put("screen_name", screeName);
+		}
+		if(cursor != null) {
+			params.put("cursor", cursor);
+		}
+		params.put("format", "json");
+		client.get(apiUrl, params, handler);
+	}
+
 }

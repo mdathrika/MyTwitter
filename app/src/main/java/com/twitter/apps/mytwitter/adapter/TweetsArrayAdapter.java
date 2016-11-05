@@ -14,6 +14,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.twitter.apps.mytwitter.MyTwitterApplication;
 import com.twitter.apps.mytwitter.R;
 
+import com.twitter.apps.mytwitter.activities.ProfileActivity;
 import com.twitter.apps.mytwitter.models.Tweet;
 import com.twitter.apps.mytwitter.serviceclient.TwitterClient;
 
@@ -177,6 +178,13 @@ public class TweetsArrayAdapter extends RecyclerView.Adapter<TweetsArrayAdapter.
             }
         });
 
+        viewHolder.ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToUserProfile(tweet.getUser().getScreenName());
+            }
+        });
+
     }
 
     // Returns the total count of items in the list
@@ -211,5 +219,11 @@ public class TweetsArrayAdapter extends RecyclerView.Adapter<TweetsArrayAdapter.
 
             }
         });
+    }
+
+    private void goToUserProfile(String screenName) {
+        Intent intent = new Intent(getContext(), ProfileActivity.class);
+        intent.putExtra("screen_name", screenName);
+        getContext().startActivity(intent);
     }
 }
