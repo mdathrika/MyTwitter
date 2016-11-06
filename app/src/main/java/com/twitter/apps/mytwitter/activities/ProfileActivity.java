@@ -1,35 +1,37 @@
 package com.twitter.apps.mytwitter.activities;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.bumptech.glide.Glide;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.twitter.apps.mytwitter.MyTwitterApplication;
 import com.twitter.apps.mytwitter.R;
+import com.twitter.apps.mytwitter.adapter.SmartFragmentStatePagerAdapter;
+import com.twitter.apps.mytwitter.fragments.MentionsTimelineFragment;
 import com.twitter.apps.mytwitter.fragments.Profile;
+import com.twitter.apps.mytwitter.fragments.Timeline;
+import com.twitter.apps.mytwitter.fragments.TweetsListFragment;
+import com.twitter.apps.mytwitter.fragments.UserFavoritesFragment;
+import com.twitter.apps.mytwitter.fragments.UserImagesFragment;
 import com.twitter.apps.mytwitter.fragments.UserTimelineFragment;
 import com.twitter.apps.mytwitter.models.User;
-import com.twitter.apps.mytwitter.serviceclient.TwitterClient;
-
-import org.json.JSONObject;
 
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Locale;
 
-import cz.msebera.android.httpclient.Header;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
-public class ProfileActivity extends AppCompatActivity implements Profile {
+public class ProfileActivity extends BaseActivity implements Profile, Timeline {
+
+    private SwipeRefreshLayout swipeContainer;
+    ViewPager viewPager;
+    ProfilePagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,36 +48,106 @@ public class ProfileActivity extends AppCompatActivity implements Profile {
 
         String screenName = getIntent().getStringExtra("screen_name");
 
-        if(savedInstanceState == null) {
-            UserTimelineFragment userTimelineFragment = UserTimelineFragment.newInstance(screenName);
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.flContainer, userTimelineFragment).commit();
-        }
+        viewPager = (ViewPager)findViewById(R.id.profileViewPager);
+        pagerAdapter = new ProfilePagerAdapter(getSupportFragmentManager(), screenName);
+        viewPager.setAdapter(pagerAdapter);
+
+        PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.profileTabs);
+        tabsStrip.setViewPager(viewPager);
+
+        attachSwipeRefresh();
+
+
+
+
+//        if(savedInstanceState == null) {
+//            UserTimelineFragment userTimelineFragment = UserTimelineFragment.newInstance(screenName);
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            fragmentManager.beginTransaction().replace(R.id.flContainer, userTimelineFragment).commit();
+//        }
 
     }
 
     public void populateHeader(User user) {
 
-        getSupportActionBar().setTitle(user.getScreenName());
-        ImageView profilePic = (ImageView)findViewById(R.id.profilePic);
-
-        TextView name = (TextView)findViewById(R.id.name);
-        TextView screen_name = (TextView)findViewById(R.id.screen_name);
-        TextView description = (TextView)findViewById(R.id.description);
-        TextView followers = (TextView)findViewById(R.id.followers);
-        TextView following = (TextView)findViewById(R.id.following);
-
-        name.setText(user.getName());
-        screen_name.setText(user.getScreenName());
-        description.setText(user.getDescription());
-
-        followers.setText(NumberFormat.getIntegerInstance(Locale.ENGLISH).format(user.getFollowersCount()) + " FOLLOWERS");
-        following.setText(NumberFormat.getIntegerInstance(Locale.ENGLISH).format(user.getFriendsCount()) + " FOLLOWING");
-
-        Glide.with(this).load(user.getProfileImageUrl()).bitmapTransform(new RoundedCornersTransformation(this, 10, 0,
-                RoundedCornersTransformation.CornerType.ALL)).into(profilePic);
+//        getSupportActionBar().setTitle(user.getScreenName());
+//        ImageView profilePic = (ImageView)findViewById(R.id.profilePic);
+//
+//        TextView name = (TextView)findViewById(R.id.name);
+//        TextView screen_name = (TextView)findViewById(R.id.screen_name);
+//        TextView description = (TextView)findViewById(R.id.description);
+//        TextView followers = (TextView)findViewById(R.id.followers);
+//        TextView following = (TextView)findViewById(R.id.following);
+//
+//        name.setText(user.getName());
+//        screen_name.setText(user.getScreenName());
+//        description.setText(user.getDescription());
+//
+//        followers.setText(NumberFormat.getIntegerInstance(Locale.ENGLISH).format(user.getFollowersCount()) + " FOLLOWERS");
+//        following.setText(NumberFormat.getIntegerInstance(Locale.ENGLISH).format(user.getFriendsCount()) + " FOLLOWING");
+//
+//        Glide.with(this).load(user.getProfileImageUrl()).bitmapTransform(new RoundedCornersTransformation(this, 10, 0,
+//                RoundedCornersTransformation.CornerType.ALL)).into(profilePic);
     }
 
+    public void attachSwipeRefresh() {
 
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                TweetsListFragment fragment = (TweetsListFragment)pagerAdapter.getRegisteredFragment(viewPager.getCurrentItem());
+                fragment.refresh();
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+    }
+
+    public void doneRefreshing() {
+        swipeContainer.setRefreshing(false);
+    }
+
+    public class ProfilePagerAdapter extends SmartFragmentStatePagerAdapter {
+        private String tabTitles[] = {"Tweets", "Photos", "Favorites"};
+        private String screenName;
+
+        public ProfilePagerAdapter(FragmentManager fm, String screenName) {
+            super(fm);
+            this.screenName = screenName;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            Bundle args = new Bundle();
+            args.putString("screen_name", screenName);
+
+            Fragment fragment;
+            if(position == 0) {
+                fragment = new UserTimelineFragment();
+            } else if(position == 1){
+                fragment = new UserImagesFragment();
+            } else {
+                fragment = new UserFavoritesFragment();
+            }
+
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+
+        @Override
+        public int getCount() {
+            return tabTitles.length;
+        }
+    }
 
 }

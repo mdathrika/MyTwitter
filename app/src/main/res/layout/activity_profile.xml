@@ -5,125 +5,148 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:http="http://schemas.android.com/tools">
 
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:id="@+id/activity_profile"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--tools:context="com.twitter.apps.mytwitter.activities.ProfileActivity">-->
-
-
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBar"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        android:orientation="vertical">
 
-
-        <android.support.v7.widget.Toolbar
-            android:minHeight="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@android:color/white"
-            android:fitsSystemWindows="true"
-            android:background="@color/colorBG"
-            android:elevation="4dp"
-            android:id="@+id/profile_toolbar"
-            app:layout_scrollFlags="scroll|enterAlways"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-        </android.support.v7.widget.Toolbar>
-
-
-        <RelativeLayout
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/profileAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/header"
-            android:layout_below="@+id/appBar"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="85dp"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/profilePic"/>
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/name"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@android:color/black"
-                android:layout_below="@+id/profilePic"
-                android:gravity="left"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/screen_name"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/gray"
-                android:layout_below="@+id/name"
-                android:gravity="left"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/description"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@android:color/black"
-                android:layout_below="@+id/screen_name"/>
-
-            <LinearLayout
+            <android.support.v7.widget.Toolbar
+                android:minHeight="?attr/actionBarSize"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/description"
-                android:layout_alignParentBottom="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/followers"
-                    android:textColor="@color/gray"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_weight="0.5"
-                    android:layout_alignParentBottom="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/following"
-                    android:gravity="center"
-                    android:textColor="@color/gray"
-                    android:layout_weight="0.5"
-                    android:textStyle="bold"
-                    android:layout_alignParentBottom="true"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
+                android:layout_height="?attr/actionBarSize"
+                app:titleTextColor="@android:color/white"
+                android:fitsSystemWindows="true"
+                android:background="@color/colorBG"
+                android:elevation="4dp"
+                android:id="@+id/profile_toolbar"
+                app:layout_scrollFlags="scroll|enterAlways"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_below="@+id/profileAppBar">
+            </android.support.v7.widget.Toolbar>
 
 
+            <!--&lt;!&ndash;RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/header"-->
+                <!--android:layout_below="@+id/appBar"-->
+                <!--android:background="@android:color/white">-->
 
-    </android.support.design.widget.AppBarLayout>
+                <!--<ImageView-->
+                    <!--android:layout_width="70dp"-->
+                    <!--android:layout_height="85dp"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:id="@+id/profilePic"/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:id="@+id/name"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:layout_below="@+id/profilePic"-->
+                    <!--android:gravity="left"/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:id="@+id/screen_name"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:textColor="@color/gray"-->
+                    <!--android:layout_below="@+id/name"-->
+                    <!--android:gravity="left"/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:id="@+id/description"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:layout_below="@+id/screen_name"/>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:layout_below="@+id/description"-->
+                    <!--android:layout_alignParentBottom="true">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/followers"-->
+                        <!--android:textColor="@color/gray"-->
+                        <!--android:gravity="center"-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:layout_weight="0.5"-->
+                        <!--android:layout_alignParentBottom="true"/>-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/following"-->
+                        <!--android:gravity="center"-->
+                        <!--android:textColor="@color/gray"-->
+                        <!--android:layout_weight="0.5"-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:layout_alignParentBottom="true"/>-->
+
+                <!--</LinearLayout>-->
+
+            <!--</RelativeLayout&ndash;&gt;-->
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/flContainer"
-        android:layout_below="@+id/header">
+        </android.support.design.widget.AppBarLayout>
 
-    </FrameLayout>
+
+
+
+
+
+
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/profileTabs"
+            app:pstsShouldExpand="true"
+            app:pstsTextAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@android:color/white"
+            app:pstsUnderlineColor="@color/colorBG"
+            app:pstsIndicatorColor="@color/colorBG"
+            android:textSize="14sp"
+            android:textColor="@color/colorBG"/>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profileTabs">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/profileViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profileTabs"
+                android:background="@android:color/white">
+            </android.support.v4.view.ViewPager>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

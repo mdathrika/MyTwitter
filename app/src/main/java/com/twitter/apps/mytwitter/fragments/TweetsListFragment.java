@@ -36,7 +36,7 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 /**
  * Created by mdathrika on 11/3/16.
  */
-public class TweetsListFragment extends Fragment{
+public abstract class TweetsListFragment extends Fragment{
 
     private List<Tweet> tweets;
     private TweetsArrayAdapter adapter;
@@ -104,9 +104,7 @@ public class TweetsListFragment extends Fragment{
         tweets.clear();
     }
 
-    public void refresh() {
-
-    }
+    public abstract void refresh();
 
     public void populateTimeline(String maxId, final boolean append) {
 

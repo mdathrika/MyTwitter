@@ -1,9 +1,12 @@
 package com.twitter.apps.mytwitter.activities;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.twitter.apps.mytwitter.R;
 import com.twitter.apps.mytwitter.fragments.Profile;
+import com.twitter.apps.mytwitter.fragments.TweetsListFragment;
 import com.twitter.apps.mytwitter.models.User;
 import com.twitter.apps.mytwitter.serviceclient.TwitterClient;
 
@@ -23,6 +26,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     TwitterClient client;
     User myDetails;
 
+    private SwipeRefreshLayout swipeContainer;
+
     public void getMyDetails() {
         client.getUserDetails(new JsonHttpResponseHandler(){
             @Override
@@ -37,4 +42,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

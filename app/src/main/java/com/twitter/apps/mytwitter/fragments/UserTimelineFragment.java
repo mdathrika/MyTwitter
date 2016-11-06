@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.twitter.apps.mytwitter.MyTwitterApplication;
 import com.twitter.apps.mytwitter.models.Tweet;
 import com.twitter.apps.mytwitter.models.User;
-import com.twitter.apps.mytwitter.serviceclient.TwitterClient;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,21 +23,22 @@ import cz.msebera.android.httpclient.Header;
 
 public class UserTimelineFragment extends TweetsListFragment {
 
-    public static UserTimelineFragment newInstance(String screenName) {
-        UserTimelineFragment userTimelineFragment = new UserTimelineFragment();
-        Bundle args = new Bundle();
-        args.putString("screen_name", screenName);
-        userTimelineFragment.setArguments(args);
-        return userTimelineFragment;
-    }
+    Timeline timeline;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getUserTimeline();
+        timeline = (Timeline)getActivity();
+
+        getUserTimeline(null, false);
 
         fetchUserDetails();
+    }
+
+    @Override
+    public void refresh() {
+        getUserTimeline(null, false);
     }
 
     @Override
@@ -47,18 +46,23 @@ public class UserTimelineFragment extends TweetsListFragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    private void getUserTimeline() {
+    private void getUserTimeline(String maxId, final boolean append) {
         String screenName = getArguments().getString("screen_name");
         final Profile profile = (Profile)getActivity();
         client.getUserTimeline(screenName, null, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                if(!append)
+                    clearTweets();
+
                 addAll(Tweet.fromJSONArray(response));
+
+                timeline.doneRefreshing();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
+                timeline.doneRefreshing();
             }
         });
     }

@@ -1,69 +1,27 @@
 package com.twitter.apps.mytwitter.activities;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.OvershootInterpolator;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.astuetz.PagerSlidingTabStrip;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.twitter.apps.mytwitter.MyTwitterApplication;
 import com.twitter.apps.mytwitter.R;
-import com.twitter.apps.mytwitter.TweetDetailsActivity;
-import com.twitter.apps.mytwitter.adapter.ItemClickSupport;
 import com.twitter.apps.mytwitter.adapter.SmartFragmentStatePagerAdapter;
-import com.twitter.apps.mytwitter.decoration.DividerItemDecoration;
-import com.twitter.apps.mytwitter.decoration.SpacesItemDecoration;
 import com.twitter.apps.mytwitter.dialogs.TweetDialog;
 import com.twitter.apps.mytwitter.fragments.HomeTimelineFragment;
 import com.twitter.apps.mytwitter.fragments.MentionsTimelineFragment;
 import com.twitter.apps.mytwitter.fragments.Timeline;
 import com.twitter.apps.mytwitter.fragments.TweetsListFragment;
-import com.twitter.apps.mytwitter.listeners.EndlessRecyclerViewScrollListener;
-import com.twitter.apps.mytwitter.models.User;
-import com.twitter.apps.mytwitter.serviceclient.TwitterClient;
-import com.twitter.apps.mytwitter.adapter.TweetsArrayAdapter;
-import com.twitter.apps.mytwitter.models.Tweet;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import cz.msebera.android.httpclient.Header;
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 
 /**
@@ -102,8 +60,6 @@ public class TimelineActivity extends BaseActivity implements Timeline {
         PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         // Attach the view pager to the tab strip
         tabsStrip.setViewPager(viewPager);
-
-        //fragment = (MentionsTimelineFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_tweets);
 
         attachSwipeRefresh();
 
