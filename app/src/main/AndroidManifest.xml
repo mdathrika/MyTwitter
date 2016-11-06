@@ -51,7 +51,8 @@
             android:name=".activities.TimelineActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".TweetDetailsActivity" />
-        <activity android:name=".activities.ProfileActivity"></activity>
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.UsersListActivity"></activity>
     </application>
 
 </manifest>

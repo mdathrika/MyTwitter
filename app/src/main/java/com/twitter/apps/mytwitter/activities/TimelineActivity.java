@@ -130,6 +130,7 @@ public class TimelineActivity extends BaseActivity implements Timeline {
     public void onProfileView(MenuItem view) {
         Intent intent = new Intent(this, ProfileActivity.class);
         intent.putExtra("screen_name", myDetails.getScreenName());
+//        intent.putExtra("action_type", "Following");
         startActivity(intent);
     }
 
