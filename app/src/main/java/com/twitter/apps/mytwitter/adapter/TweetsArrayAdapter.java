@@ -110,7 +110,7 @@ public class TweetsArrayAdapter extends RecyclerView.Adapter<TweetsArrayAdapter.
         viewHolder.tvUserName.setText(tweet.getUser().getName());
 
         viewHolder.tvTimeAgo.setText(tweet.getTimeAgo());
-        viewHolder.tvScreenName.setText(tweet.getUser().getScreenName());
+        viewHolder.tvScreenName.setText("@"+tweet.getUser().getScreenName());
 
         if(tweet.isRetweeted())
             viewHolder.retweetCnt.setCompoundDrawablesWithIntrinsicBounds(R.drawable.retweet_clicked, 0,0,0);

@@ -36,52 +36,53 @@
             </android.support.v7.widget.Toolbar>
 
 
-            <!--&lt;!&ndash;RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/header"-->
-                <!--android:layout_below="@+id/appBar"-->
-                <!--android:background="@android:color/white">-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/header"
+                android:background="@android:color/white">
 
-                <!--<ImageView-->
-                    <!--android:layout_width="70dp"-->
-                    <!--android:layout_height="85dp"-->
-                    <!--android:layout_marginLeft="20dp"-->
-                    <!--android:id="@+id/profilePic"/>-->
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="85dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/profilePic"/>
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:id="@+id/name"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_marginTop="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:layout_below="@+id/profilePic"-->
-                    <!--android:gravity="left"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/name"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@android:color/black"
+                    android:layout_toRightOf="@+id/profilePic"
+                    android:gravity="left"/>
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:id="@+id/screen_name"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_marginTop="5dp"-->
-                    <!--android:textColor="@color/gray"-->
-                    <!--android:layout_below="@+id/name"-->
-                    <!--android:gravity="left"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/screen_name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/gray"
+                    android:layout_toRightOf="@+id/profilePic"
+                    android:layout_below="@+id/name"
+                    android:gravity="left"/>
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:id="@+id/description"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_marginTop="5dp"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:layout_below="@+id/screen_name"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/description"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@android:color/black"
+                    android:layout_toRightOf="@+id/profilePic"
+                    android:layout_below="@+id/screen_name"/>
 
                 <!--<LinearLayout-->
                     <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
                     <!--android:orientation="horizontal"-->
                     <!--android:layout_marginTop="15dp"-->
                     <!--android:layout_below="@+id/description"-->
@@ -109,13 +110,10 @@
 
                 <!--</LinearLayout>-->
 
-            <!--</RelativeLayout&ndash;&gt;-->
+            </RelativeLayout>
 
 
         </android.support.design.widget.AppBarLayout>
-
-
-
 
 
 

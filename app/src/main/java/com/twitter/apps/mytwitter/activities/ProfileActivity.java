@@ -1,11 +1,13 @@
 package com.twitter.apps.mytwitter.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,26 +70,41 @@ public class ProfileActivity extends BaseActivity implements Profile, Timeline {
 
     }
 
-    public void populateHeader(User user) {
+    public void populateHeader(final User user) {
 
-//        getSupportActionBar().setTitle(user.getScreenName());
-//        ImageView profilePic = (ImageView)findViewById(R.id.profilePic);
-//
-//        TextView name = (TextView)findViewById(R.id.name);
-//        TextView screen_name = (TextView)findViewById(R.id.screen_name);
-//        TextView description = (TextView)findViewById(R.id.description);
+        getSupportActionBar().setTitle(user.getScreenName());
+        ImageView profilePic = (ImageView)findViewById(R.id.profilePic);
+
+        TextView name = (TextView)findViewById(R.id.name);
+        TextView screen_name = (TextView)findViewById(R.id.screen_name);
+        TextView description = (TextView)findViewById(R.id.description);
 //        TextView followers = (TextView)findViewById(R.id.followers);
 //        TextView following = (TextView)findViewById(R.id.following);
 //
-//        name.setText(user.getName());
-//        screen_name.setText(user.getScreenName());
-//        description.setText(user.getDescription());
+        name.setText(user.getName());
+        screen_name.setText("@"+user.getScreenName());
+        description.setText(user.getDescription());
 //
 //        followers.setText(NumberFormat.getIntegerInstance(Locale.ENGLISH).format(user.getFollowersCount()) + " FOLLOWERS");
 //        following.setText(NumberFormat.getIntegerInstance(Locale.ENGLISH).format(user.getFriendsCount()) + " FOLLOWING");
 //
-//        Glide.with(this).load(user.getProfileImageUrl()).bitmapTransform(new RoundedCornersTransformation(this, 10, 0,
-//                RoundedCornersTransformation.CornerType.ALL)).into(profilePic);
+        Glide.with(this).load(user.getProfileImageUrl()).bitmapTransform(new RoundedCornersTransformation(this, 10, 0,
+                RoundedCornersTransformation.CornerType.ALL)).into(profilePic);
+//
+//        followers.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                goToUsersList("Followers",user.getScreenName());
+//            }
+//        });
+//
+//        following.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                goToUsersList("Following", user.getScreenName());
+//            }
+//        });
+
     }
 
     public void attachSwipeRefresh() {
@@ -148,6 +165,13 @@ public class ProfileActivity extends BaseActivity implements Profile, Timeline {
         public int getCount() {
             return tabTitles.length;
         }
+    }
+
+    private void goToUsersList(String actionType, String screenName) {
+        Intent intent = new Intent(this, UsersListActivity.class);
+        intent.putExtra("screen_name", screenName);
+        intent.putExtra("action_type", actionType);
+        startActivity(intent);
     }
 
 }
